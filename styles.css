@@ -1,0 +1,100 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    background: #f8f9fa;
+    color: #003c71;
+}
+
+h1, h2, h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+}
+
+header {
+    background: #ffffff;
+    color: #003c71;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #d3dcdc;
+}
+
+header div {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+header p {
+    font-size: 0.9rem;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+}
+
+#survey-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 700px;
+    padding: 1.5rem 2rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+footer#survey-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 2rem;
+    border-radius: 0;
+    cursor: pointer;
+    background: #ffffff;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+    border: 1px solid #0069ff;
+    color: #0069ff;
+}
+
+.btn-primary:not(:disabled):hover {
+    background: #0069ff;
+    color: #ffffff;
+}
+
+.btn-alt {
+    border: 1px solid #d3dcdc;
+    color: #0069ff;
+}
+
+.btn-alt:not(:disabled):hover {
+    border-color: #0069ff;
+    background: #0069ff;
+    color: #ffffff;
+}
+
+button:disabled {
+    border: 1px solid #d3dcdc;
+    color: #d3dcdc;
+    background: #ffffff;
+    cursor: not-allowed;
+}
