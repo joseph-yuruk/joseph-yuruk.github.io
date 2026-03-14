@@ -331,7 +331,7 @@ function pEnd() {
 
 // functional definitions
 
-let pageActive = 0;
+let pageActive = 7;
 let pageLast;
 function onLoad(callback = () => {}) { if(pageLast !== pageActive) callback(); };
 function onLoadEnd() { pageLast = pageActive; };
@@ -396,6 +396,7 @@ function hash(email) {
 };
 
 async function surveyDataSend() {
+    console.log(JSON.stringify(surveyData));
     await fetch('https://script.google.com/macros/s/AKfycbytf65dpvHm-eJSHfLXgOa4FiZbC8Qa3IvxgoVuj_NwQOZbHRvWGTaeiskMvd3L-MMS/exec', {
         method: 'POST',
         mode: 'no-cors',
