@@ -1,27 +1,29 @@
 // survey page definitions
 
 const surveyData = {
-    q1: "",
+    q1: [],
     q2: [],
     q3: "",
     q4: "",
-    q5a: [],
-    q5b: [],
-    q5c: [],
-    q5d: [],
+    q5a: "", q5b: "", q5c: "", q5d: "", q5e: "", q5f: "", q5g: "", q5h: "",
+    q6: "",
     name: "",
-    email: ""
+    email: "",
+    consent: [],
+    refFrom: "",
+    refTo: ""
 };
 
 const pageIndex = [
-    pageStart,
-    pageQ1,
-    pageQ2,
-    pageQ3,
-    pageQ4,
-    pageQ5,
-    pageSubmit,
-    pageEnd
+    pStart,
+    p1,
+    p2,
+    p3,
+    p4,
+    p5,
+    p6,
+    pSubmit,
+    pEnd
 ];
 
 function pageDefault() {
@@ -38,7 +40,7 @@ function pageDefault() {
     });
 };
 
-function pageStart() {
+function pStart() {
     onLoad(() => {
         document.getElementById('page-counter').textContent = `Total pages: ${pageIndex.length - 2}`;
         document.getElementById('btn-next').textContent = "Start";
@@ -49,7 +51,7 @@ function pageStart() {
         <br>
         <hr>
         <br>
-        <h1>Win up to $100.00 CAD in cash!</h1>
+        <h2>Win up to $100.00 CAD in cash!</h2>
         <br>
         <p>All eligible* students who complete this survey will be automatically entered into a draw for a <strong>$50.00 CAD cash prize!</strong></p>
         <br>
@@ -64,143 +66,264 @@ function pageStart() {
     });
 };
 
-function pageQ1() {
+function p1() {
     onLoad(() => {
         document.getElementById('survey-container').innerHTML = `
-        <h2>Question 1: Are you currently enrolled as a student in any program or course at BCIT?</h2>
+        <h2>Are you currently enrolled as a student in a program or course at BCIT?</h2>
         <br>
-        <p>Select one (must be a student):</p>
-        <div class="radio-group">
+        <p>Check the following:</p>
+        <div class="checkbox-group">
             <label>
-                <input type="radio" name="question" value="yes"> Yes
-            </label>
-            <label>
-                <input type="radio" name="question" value="no"> No
+                <input type="checkbox" name="q1" value="student"> I am currently enrolled as a student in a program or course at BCIT.
             </label>
         </div>
         `;
-        handlerRadio("question", "q1");
+        handlerCheckbox("q1", "q1");
     });
 
-    document.getElementById('btn-next').disabled = surveyData.q1 !== "yes";
+    document.getElementById('btn-next').disabled = surveyData.q1.length === 0;
 };
 
-function pageQ2() {
+function p2() {
     onLoad(() => {
         document.getElementById('survey-container').innerHTML = `
-        <h2>Question 2: Which BCIT campus/campuses do you study at?</h2>
+        <h2>Which BCIT campus/campuses do you study at?</h2>
         <br>
         <p>Select all that apply:</p>
         <div class="checkbox-group">
             <label>
-                <input type="checkbox" name="question" value="burnaby"> Burnaby Campus
+                <input type="checkbox" name="q2" value="burnaby"> Burnaby Campus
             </label>
             <label>
-                <input type="checkbox" name="question" value="vancouver"> Downtown Vancouver Campus
+                <input type="checkbox" name="q2" value="vancouver"> Downtown Vancouver Campus
             </label>
             <label>
-                <input type="checkbox" name="question" value="richmond"> Aerospace Technology Campus, Richmond
+                <input type="checkbox" name="q2" value="richmond"> Aerospace Technology Campus, Richmond
             </label>
             <label>
-                <input type="checkbox" name="question" value="north_vancouver"> Marine Campus, North Vancouver
+                <input type="checkbox" name="q2" value="north_vancouver"> Marine Campus, North Vancouver
             </label>
             <label>
-                <input type="checkbox" name="question" value="delta"> Annacis Island Campus, Delta
+                <input type="checkbox" name="q2" value="delta"> Annacis Island Campus, Delta
             </label>
             <label>
-                <input type="checkbox" name="question" value="other"> Other
+                <input type="checkbox" name="q2" value="other"> Other
             </label>
         </div>
         `;
-        handlerCheckbox("question", "q2");
+        handlerCheckbox("q2", "q2");
     });
 
     document.getElementById('btn-next').disabled = surveyData.q2.length === 0;
 };
 
-function pageQ3() {
+function p3() {
     onLoad(() => {
         document.getElementById('survey-container').innerHTML = `
-        <h2>Question 3: How many times have you paid for food from <u>restaurants or stores on campus</u> in the last 7 days?</h2>
+        <h2>How many times did you spend money at <u>restaurants or stores on campus</u> in your <u>most recent full week at school</u>?</h2>
         <br>
-        <p>Number of times:</p>
-        <input type="text" name="question" placeholder="Type here...">
+        <p>Number of times (an estimation is alright):</p>
+        <input type="text" name="q3" placeholder="Type here...">
         `;
-        handlerText("question", "q3");
+        handlerText("q3", "q3");
     });
 
     document.getElementById('btn-next').disabled = !(surveyData.q3 !== "" && !isNaN(surveyData.q3) && Number.isInteger(parseFloat(surveyData.q3)) && surveyData.q3 >= 0);
 };
 
-function pageQ4() {
+function p4() {
     onLoad(() => {
         document.getElementById('survey-container').innerHTML = `
-        <h2>Question 4: How much money in total have you paid for food from <u>restaurants or stores on campus</u> in the last 7 days?</h2>
+        <h2>How much money in total did you spent at <u>restaurants or stores on campus</u> in your <u>most recent full week at school</u>?</h2>
         <br>
-        <p>Total money spent ($CAD):</p>
-        <input type="text" name="question" placeholder="Type here...">
+        <p>Total money spent ($CAD) (an estimation is alright):</p>
+        <input type="text" name="q4" placeholder="Type here...">
         `;
-        handlerText("question", "q4");
+        handlerText("q4", "q4");
     });
 
     document.getElementById('btn-next').disabled = !(surveyData.q4 !== "" && !isNaN(surveyData.q4) && surveyData.q4 >= 0);
 };
 
-function pageQ5() {
+function p5() {
     onLoad(() => {
         document.getElementById('survey-container').innerHTML = `
-        <h2>Question 5: How concerned are you about the following aspects of <u>restaurants or stores on campus</u>?</h2>
+        <h2>On a scale of 1-5, rate the following aspects of <u>restaurants or stores on campus</u>...</h2>
         <br>
-        <p>Select a concern level for each:</p>
+        <p>Rate for each aspect from 5 (very good) to 1 (very bad):</p>
         <div class="likert-row">
-            <span><strong>Too expensive</strong></span>
+            <span><strong>Food pricing</strong></span>
             <div class="radio-group radio-horizontal">
-                <label><input type="radio" name="q5a" value="3"> Very</label>
-                <label><input type="radio" name="q5a" value="2"> Somewhat</label>
-                <label><input type="radio" name="q5a" value="1"> Not at all</label>
+                <label><input type="radio" name="q5a" value="5"> 5</label>
+                <label><input type="radio" name="q5a" value="4"> 4</label>
+                <label><input type="radio" name="q5a" value="3"> 3</label>
+                <label><input type="radio" name="q5a" value="2"> 2</label>
+                <label><input type="radio" name="q5a" value="1"> 1</label>
+                <label><input type="radio" name="q5a" value="0"> No opinion</label>
             </div>
         </div>
         <div class="likert-row">
-            <span><strong>Too expensive</strong></span>
+            <span><strong>Food quality</strong></span>
             <div class="radio-group radio-horizontal">
-                <label><input type="radio" name="q5a" value="1"> Very</label>
-                <label><input type="radio" name="q5a" value="2"> Somewhat</label>
-                <label><input type="radio" name="q5a" value="3"> Not at all</label>
+                <label><input type="radio" name="q5b" value="5"> 5</label>
+                <label><input type="radio" name="q5b" value="4"> 4</label>
+                <label><input type="radio" name="q5b" value="3"> 3</label>
+                <label><input type="radio" name="q5b" value="2"> 2</label>
+                <label><input type="radio" name="q5b" value="1"> 1</label>
+                <label><input type="radio" name="q5b" value="0"> No opinion</label>
+            </div>
+        </div>
+        <div class="likert-row">
+            <span><strong>Food choice variety</strong></span>
+            <div class="radio-group radio-horizontal">
+                <label><input type="radio" name="q5c" value="5"> 5</label>
+                <label><input type="radio" name="q5c" value="4"> 4</label>
+                <label><input type="radio" name="q5c" value="3"> 3</label>
+                <label><input type="radio" name="q5c" value="2"> 2</label>
+                <label><input type="radio" name="q5c" value="1"> 1</label>
+                <label><input type="radio" name="q5c" value="0"> No opinion</label>
+            </div>
+        </div>
+        <div class="likert-row">
+            <span><strong>Dietary accomodations</strong></span>
+            <div class="radio-group radio-horizontal">
+                <label><input type="radio" name="q5d" value="5"> 5</label>
+                <label><input type="radio" name="q5d" value="4"> 4</label>
+                <label><input type="radio" name="q5d" value="3"> 3</label>
+                <label><input type="radio" name="q5d" value="2"> 2</label>
+                <label><input type="radio" name="q5d" value="1"> 1</label>
+                <label><input type="radio" name="q5d" value="0"> No opinion</label>
+            </div>
+        </div>
+        <div class="likert-row">
+            <span><strong>Wait times</strong></span>
+            <div class="radio-group radio-horizontal">
+                <label><input type="radio" name="q5e" value="5"> 5</label>
+                <label><input type="radio" name="q5e" value="4"> 4</label>
+                <label><input type="radio" name="q5e" value="3"> 3</label>
+                <label><input type="radio" name="q5e" value="2"> 2</label>
+                <label><input type="radio" name="q5e" value="1"> 1</label>
+                <label><input type="radio" name="q5e" value="0"> No opinion</label>
+            </div>
+        </div>
+        <div class="likert-row">
+            <span><strong>Hours of operation</strong></span>
+            <div class="radio-group radio-horizontal">
+                <label><input type="radio" name="q5f" value="5"> 5</label>
+                <label><input type="radio" name="q5f" value="4"> 4</label>
+                <label><input type="radio" name="q5f" value="3"> 3</label>
+                <label><input type="radio" name="q5f" value="2"> 2</label>
+                <label><input type="radio" name="q5f" value="1"> 1</label>
+                <label><input type="radio" name="q5f" value="0"> No opinion</label>
+            </div>
+        </div>
+        <div class="likert-row">
+            <span><strong>Online ordering</strong></span>
+            <div class="radio-group radio-horizontal">
+                <label><input type="radio" name="q5g" value="5"> 5</label>
+                <label><input type="radio" name="q5g" value="4"> 4</label>
+                <label><input type="radio" name="q5g" value="3"> 3</label>
+                <label><input type="radio" name="q5g" value="2"> 2</label>
+                <label><input type="radio" name="q5g" value="1"> 1</label>
+                <label><input type="radio" name="q5g" value="0"> No opinion</label>
+            </div>
+        </div>
+        <div class="likert-row">
+            <span><strong>Staff</strong></span>
+            <div class="radio-group radio-horizontal">
+                <label><input type="radio" name="q5h" value="5"> 5</label>
+                <label><input type="radio" name="q5h" value="4"> 4</label>
+                <label><input type="radio" name="q5h" value="3"> 3</label>
+                <label><input type="radio" name="q5h" value="2"> 2</label>
+                <label><input type="radio" name="q5h" value="1"> 1</label>
+                <label><input type="radio" name="q5h" value="0"> No opinion</label>
             </div>
         </div>
         `;
+        handlerRadio("q5a", "q5a");
+        handlerRadio("q5b", "q5b");
+        handlerRadio("q5c", "q5c");
+        handlerRadio("q5d", "q5d");
+        handlerRadio("q5e", "q5e");
+        handlerRadio("q5f", "q5f");
+        handlerRadio("q5g", "q5g");
+        handlerRadio("q5h", "q5h");
     });
 
-    document.getElementById('btn-next').disabled = !(surveyData.q4 !== "" && !isNaN(surveyData.q4) && surveyData.q4 >= 0);
+    document.getElementById('btn-next').disabled = !(surveyData.q5a && surveyData.q5b && surveyData.q5c && surveyData.q5d && surveyData.q5e && surveyData.q5f && surveyData.q5g && surveyData.q5h);
 };
 
-function pageSubmit() {
+function p6() {
+    onLoad(() => {
+        document.getElementById('survey-container').innerHTML = `
+        <h2>Do you have any specific concerns about <u>restaurants or stores on campus</u>?</h2>
+        <br>
+        <p>Specific concerns (optional):</p>
+        <input type="text" name="q6" placeholder="Type here...">
+        `;
+        handlerText("q6", "q6");
+    });
+};
+
+function pSubmit() {
     onLoad(() => {
         document.getElementById('btn-next').textContent = "Submit";
         document.getElementById('survey-container').innerHTML = `
         <h2>Contact Information</h2>
         <br>
-        <p>Please provide your name and student email. These are required so we can reach out to you if you win one of the cash prizes.</p>
+        <p>Your contact information is needed if you want to be entered into the prize draws.</p>
         <br>
         <hr>
         <br>
-        <p>First and last name:</p>
+        <p>Full name:</p>
         <input type="text" name="name" placeholder="Type here...">
         <br>
         <p>Student email address (ending in @my.bcit.ca):</p>
         <input type="text" name="email" placeholder="Type here...">
+        <br>
+        <p>Check the following:</p>
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" name="consent" value="receive_emails"> I consent to receiving emails from the Yuruk-Davidson Campaign (the organisers of this survey).
+            </label>
+        </div>
         `;
         handlerText("name", "name");
         handlerText("email", "email");
+        handlerCheckbox("consent", "consent");
     });
 
-    document.getElementById('btn-next').disabled = !(surveyData.name !== "" && surveyData.email.length > 11 && surveyData.email.slice(-11) === "@my.bcit.ca");
+    document.getElementById('btn-next').disabled = !(surveyData.consent.length === 1 && surveyData.name !== "" && surveyData.email.length > 11 && surveyData.email.slice(-11) === "@my.bcit.ca" && !surveyData.email.includes(" "));
 };
 
-function pageEnd() {
+function pEnd() {
+    const params = new URLSearchParams(window.location.search);
+    
+    surveyData.refFrom = params.get('ref');
+    surveyData.refTo = hash(surveyData.email);
+
     onLoad(() => {
-        document.getElementById('page-counter').textContent = "Submitted";
+        document.getElementById('page-counter').textContent = "Submitted!";
         document.getElementById('btn-back').disabled = true;
+        document.getElementById('survey-container').innerHTML = `
+        <h1>Thank You!</h1>
+        <br>
+        <p>Your responses have been submitted, and you have been entered into the draw for the <strong>$50.00 CAD cash prize!</strong> If you are interested in the additional draw, please read below...</p>
+        <br>
+        <hr>
+        <br>
+        <h2>Share this survey to enter the additional draw!</h2>
+        <br>
+        <p>Want to be entered into the additional <strong>$50.00 CAD cash prize</strong> draw? You'll receive <strong>1 additional bonus entry</strong> for <strong><u>each</u></strong> eligible* student who completes this survey using your personalised referral link below!</p>
+        <br>
+        <div class="copy-box">
+            <input type="text" id="copy-input" readonly value="https://www.yuruk.ca/survey/?ref=${surveyData.refTo}">
+            <button class="btn-alt" id="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('copy-input').value);document.getElementById('copy-btn').textContent = 'Link Copied!'">Copy Link</button>
+        </div>
+        <br>
+        <p><small>*To be eligible, you must (1) be currently enrolled in any program or course at the British Columbia Institute of Technology, and (2) provide only truthful and accurate survey responses. All winners will be checked to ensure they are eligible.</small></p>
+        `;
+        surveyDataSend();
     });
 };
 
@@ -208,7 +331,7 @@ function pageEnd() {
 
 // functional definitions
 
-let pageActive = 5;
+let pageActive = 0;
 let pageLast;
 function onLoad(callback = () => {}) { if(pageLast !== pageActive) callback(); };
 function onLoadEnd() { pageLast = pageActive; };
@@ -224,7 +347,7 @@ document.getElementById('btn-back').addEventListener('click', () => {
 });
 
 function handlerRadio(name = "", index = "") {
-    try { document.querySelector(`input[name="${name}"][value="${surveyData[index]}"]`).checked = true; } catch {};
+    try { docut.querySelector(`input[name="${name}"][value="${surveyData[index]}"]`).checked = true; } catch {};
     document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
         radio.addEventListener('change', () => {
             surveyData[index] = radio.value;
@@ -260,6 +383,23 @@ function onUpdate() {
     pageIndex[pageActive]();
 
     onLoadEnd();
+};
+
+function hash(email) {
+    let hash = 0;
+    const str = email.toLowerCase().trim();
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+    }
+    return Math.abs(hash).toString().padStart(10, '0');
+};
+
+function surveyDataSend() {
+    fetch('https://script.google.com/macros/s/AKfycbwSmOGf5X4XJUQaqdVdLj3PpItQMf2gdd0z2Fg7HuLIPk685t5zhToqg955kRwsGS7d/exec', {
+        method: 'POST',
+        body: JSON.stringify(surveyData)
+    });
 };
 
 onUpdate();

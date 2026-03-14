@@ -44,6 +44,7 @@ main {
 #survey-container {
     background: #ffffff;
     width: 100%;
+    min-width: 700px;
     max-width: 700px;
     padding: 1.5rem 2rem;
     border-radius: 4px;
@@ -69,6 +70,7 @@ button {
     cursor: pointer;
     background: #ffffff;
     transition: background 0.2s, color 0.2s, border-color 0.2s;
+    width: 120px;
 }
 
 .btn-primary {
@@ -132,10 +134,6 @@ input[type="text"] {
     margin: 0.5rem 0 1rem 0;
 }
 
-#btn-back, #btn-next {
-    width: 120px;
-}
-
 .radio-horizontal {
     display: flex;
     flex-direction: row;
@@ -147,5 +145,15 @@ input[type="text"] {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin: 0 2rem -0.5rem 2rem;
+    margin: 0 1rem -0.5rem 1rem;
+}
+
+.copy-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.copy-box button {
+    align-self: flex-start;
+    width: 180px
 }
