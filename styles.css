@@ -103,4 +103,49 @@ button:disabled {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.checkbox-group {
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    cursor: pointer;
+}
+
+input[type="text"] {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    color: #003c71;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d3dcdc;
+    border-radius: 4px;
+    margin: 0.5rem 0 1rem 0;
+}
+
+#btn-back, #btn-next {
+    width: 120px;
+}
+
+.radio-horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+.likert-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 2rem -0.5rem 2rem;
 }
