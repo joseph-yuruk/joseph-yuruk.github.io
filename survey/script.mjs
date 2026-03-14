@@ -395,10 +395,12 @@ function hash(email) {
     return Math.abs(hash).toString().padStart(10, '0');
 };
 
-function surveyDataSend() {
-    fetch('https://script.google.com/macros/s/AKfycbwSmOGf5X4XJUQaqdVdLj3PpItQMf2gdd0z2Fg7HuLIPk685t5zhToqg955kRwsGS7d/exec', {
+async function surveyDataSend() {
+    await fetch('https://script.google.com/macros/s/AKfycbytf65dpvHm-eJSHfLXgOa4FiZbC8Qa3IvxgoVuj_NwQOZbHRvWGTaeiskMvd3L-MMS/exec', {
         method: 'POST',
-        body: JSON.stringify(surveyData)
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ data: JSON.stringify(surveyData) })
     });
 };
 
