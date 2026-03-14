@@ -331,7 +331,7 @@ function pEnd() {
 
 // functional definitions
 
-let pageActive = 7;
+let pageActive = 0;
 let pageLast;
 function onLoad(callback = () => {}) { if(pageLast !== pageActive) callback(); };
 function onLoadEnd() { pageLast = pageActive; };
