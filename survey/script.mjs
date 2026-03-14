@@ -1,17 +1,18 @@
 // survey page definitions
 
 const surveyData = {
+    version: "0",
+    refFrom: "",
+    refTo: "",
+    name: "",
+    email: "",
+    consent: [],
     q1: [],
     q2: [],
     q3: "",
     q4: "",
     q5a: "", q5b: "", q5c: "", q5d: "", q5e: "", q5f: "", q5g: "", q5h: "",
-    q6: "",
-    name: "",
-    email: "",
-    consent: [],
-    refFrom: "",
-    refTo: ""
+    q6: ""
 };
 
 const pageIndex = [
