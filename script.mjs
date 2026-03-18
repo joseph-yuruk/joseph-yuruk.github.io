@@ -1,1 +1,1 @@
-window.location.href = `https://www.yuruk.ca/survey/`;
+window.location.href = `https://www.yuruk.ca/v/`;
